@@ -1,5 +1,5 @@
 # ImageCompare
-Compares two images, creates a third image showing the difference and finally creates an HTML Site, to show the result.
+Compares two images, creates a third image showing the difference and finally creates a HTML Site, to show the result.
 
 <br>
 
