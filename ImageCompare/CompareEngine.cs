@@ -40,18 +40,6 @@ namespace ImageCompare
                 }).ToList();
                 foreach (var g in group)
                     list.Remove(g);
-                //var l = new List<Position>();
-                //foreach (var item in list)
-                //{
-                //    foreach (var g in group)
-                //    {
-                //        if (item.NextTo(g, 10))
-                //            l.Add(item);
-                //    }
-                //}
-                //group.AddRange(l);
-                //foreach (var g in l)
-                //    list.Remove(g);
                 groups.Add(group);
             }
 
