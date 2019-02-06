@@ -25,6 +25,19 @@ namespace CMK
             HtmlCreator.Create("index.html",list);
             System.Diagnostics.Process.Start("index.html");
         }
+        public List<string> CompareToList(List<Images> images)
+        {
+            var list = new List<string>();
+            list.Add(File.ReadAllText("Templates\\WebClientScript.js"));
+            int i = 1;
+            foreach (var image in images)
+            {
+                var diffimage = Compare(image.ImageA, image.ImageB, i);
+                list.Add(HtmlCreator.GetHtmlSnippet(image.ImageA, image.ImageB, diffimage.ImageDiff, i));
+                i++;
+            }
+            return list;
+        }
 
         public Images Compare(string image1, string image2, int i)
         {

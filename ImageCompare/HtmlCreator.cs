@@ -30,5 +30,15 @@ namespace ImageCompare
             str = str.Replace("{{list}}", rows);
             File.WriteAllText(filePath, str);
         }
+
+        public static string GetHtmlSnippet(string image1, string image2, string image3, int i)
+        {
+            var div = File.ReadAllText("Templates\\AddRemoveImages.html");
+            return div
+                    .Replace("{{urla}}", image1)
+                    .Replace("{{urlb}}", image2)
+                    .Replace("{{urld}}", image3.Replace("\\", "/"))
+                    .Replace("{{id}}", i.ToString());
+        }
     }
 }

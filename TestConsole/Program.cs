@@ -24,10 +24,16 @@ namespace TestConsole
                 {
                     ImageA = @"C:/difftest/21.bmp",
                     ImageB = @"C:/difftest/22.bmp"
+                },
+                new Images
+                {
+                    ImageA = @"C:/difftest/31.bmp",
+                    ImageB = @"C:/difftest/32.bmp"
                 }
             };
             var t = new CMK.ImageCompare();
             t.Compare(list);
+            var test = t.CompareToList(list);
         }
     }
 }
