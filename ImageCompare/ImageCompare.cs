@@ -10,15 +10,18 @@ namespace CMK
     public class ImageCompare
     {
         Config config;
+        HtmlCreator htmlCreator;
 
         public ImageCompare()
         {
             config = Config.GetDefault();
+            htmlCreator = new HtmlCreator(config);
         }
 
         public ImageCompare(Config config)
         {
             this.config = config ?? Config.GetDefault();
+            htmlCreator = new HtmlCreator(config);
         }
 
         public void Compare(List<Images> images)
@@ -30,7 +33,7 @@ namespace CMK
                 list.Add(Compare(image.ImageA, image.ImageB, i));
                 i++;
             }
-            HtmlCreator.Create($"{config.OutputPath}//{config.OutputFileName}",list);
+            htmlCreator.Create($"{config.OutputPath}//{config.OutputFileName}", list);
             System.Diagnostics.Process.Start($"{config.OutputPath}//{config.OutputFileName}");
         }
         public List<string> CompareToList(List<Images> images)
@@ -41,7 +44,7 @@ namespace CMK
             foreach (var image in images)
             {
                 var diffimage = Compare(image.ImageA, image.ImageB, i);
-                list.Add(HtmlCreator.GetHtmlSnippet(diffimage, i, config));
+                list.Add(htmlCreator.GetHtmlSnippet(diffimage, i));
                 i++;
             }
             return list;
