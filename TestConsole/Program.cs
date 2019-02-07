@@ -1,4 +1,5 @@
-﻿using ImageCompare.DTOs;
+﻿using ImageCompare;
+using ImageCompare.DTOs;
 using System.Collections.Generic;
 
 namespace TestConsole
@@ -25,9 +26,10 @@ namespace TestConsole
                     ImageB = @"C:/difftest/32.bmp"
                 }
             };
-            var t = new CMK.ImageCompare();
+            var cfg = Config.GetDefault();
+            cfg.OutputPath = "C:\\difftest";
+            var t = new CMK.ImageCompare(cfg);
             t.Compare(list);
-            var test = t.CompareToList(list);
         }
     }
 }

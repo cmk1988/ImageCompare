@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompareEngine.cs" />
+    <Compile Include="Config.cs" />
     <Compile Include="DTOs\Difference.cs" />
     <Compile Include="DTOs\Images.cs" />
     <Compile Include="DTOs\Position.cs" />

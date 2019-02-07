@@ -8,6 +8,18 @@ namespace CMK
 {
     public class ImageCompare
     {
+        Config config;
+
+        public ImageCompare()
+        {
+            config = Config.GetDefault();
+        }
+
+        public ImageCompare(Config config)
+        {
+            this.config = config ?? Config.GetDefault();
+        }
+
         public void Compare(List<Images> images)
         {
             var list = new List<Images>();
@@ -23,12 +35,12 @@ namespace CMK
         public List<string> CompareToList(List<Images> images)
         {
             var list = new List<string>();
-            list.Add(File.ReadAllText("Templates\\WebClientScript.js"));
+            list.Add(File.ReadAllText($"{config.TemplatePath}\\{config.ClientScript}"));
             int i = 1;
             foreach (var image in images)
             {
                 var diffimage = Compare(image.ImageA, image.ImageB, i);
-                list.Add(HtmlCreator.GetHtmlSnippet(image.ImageA, image.ImageB, diffimage.ImageDiff, i));
+                list.Add(HtmlCreator.GetHtmlSnippet(diffimage, i, config));
                 i++;
             }
             return list;
@@ -40,12 +52,12 @@ namespace CMK
             using (var imageb = Image.FromFile(image2))
             {
                 var test = CompareEngine.GetDiff2((Bitmap)imagea, (Bitmap)imageb);
-                test.Save($"test{i}.bmp");
+                test.Save($"{config.OutputPath}\\{config.ImageFileName}{i}.bmp");
                 return new Images
                 {
                     ImageA = image1,
                     ImageB = image2,
-                    ImageDiff = $"{Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location)}\\test{i}.bmp"
+                    ImageDiff = $"{config.OutputPath}\\{config.ImageFileName}{i}.bmp"
                 };
             }
         }
