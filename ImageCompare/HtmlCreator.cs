@@ -7,23 +7,18 @@ namespace ImageCompare
     public class HtmlCreator
     {
         Config config;
-        string div;
+        readonly string div;
 
         public HtmlCreator()
         {
             config = Config.GetDefault();
-            loadDiv();
+            div = File.ReadAllText($"{config.TemplatePath}\\{config.AddRemoveImageTemplate}");
         }
 
         public HtmlCreator(Config config)
         {
             this.config = config ?? Config.GetDefault();
-            loadDiv();
-        }
-
-        private void loadDiv()
-        {
-            var div = File.ReadAllText($"{config.TemplatePath}\\{config.AddRemoveImageTemplate}");
+            div = File.ReadAllText($"{config.TemplatePath}\\{config.AddRemoveImageTemplate}");
         }
 
         public void Create(string filePath, IEnumerable<Images> images)
@@ -31,7 +26,6 @@ namespace ImageCompare
             var str = File.ReadAllText($"{config.TemplatePath}\\{config.IndexTemplate}");
             var script = File.ReadAllText($"{config.TemplatePath}\\{config.ClientScript}");
             str = str.Replace(config.Placeholder_IndexTemplate_Script, script);
-            var div = File.ReadAllText($"{config.TemplatePath}\\{config.AddRemoveImageTemplate}");
             var rows = "";
             var id = 0;
             foreach (var img in images)
@@ -49,7 +43,6 @@ namespace ImageCompare
 
         public string GetHtmlSnippet(Images img, int i)
         {
-            var div = File.ReadAllText($"{config.TemplatePath}\\{config.AddRemoveImageTemplate}");
             return div
                     .Replace(config.Placeholder_AddRemoveImageTemplate_UrlA, img.ImageA.Replace("\\", "/"))
                     .Replace(config.Placeholder_AddRemoveImageTemplate_UrlB, img.ImageB.Replace("\\", "/"))

@@ -1,6 +1,7 @@
 ﻿using ImageCompare;
 using ImageCompare.DTOs;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -34,7 +35,7 @@ namespace CMK
                 i++;
             }
             htmlCreator.Create($"{config.OutputPath}//{config.OutputFileName}", list);
-            System.Diagnostics.Process.Start($"{config.OutputPath}//{config.OutputFileName}");
+            Process.Start($"{config.OutputPath}//{config.OutputFileName}");
         }
         public List<string> CompareToList(List<Images> images)
         {
@@ -73,7 +74,7 @@ namespace CMK
                 if(config.ConvertTiffToBmp)
                 {
                     image1 = convertImage(imagea, i, "A") ?? image1;
-                    image2 = convertImage(imagea, i, "B") ?? image1;
+                    image2 = convertImage(imagea, i, "B") ?? image2;
                 }
                 var test = CompareEngine.GetDiff2((Bitmap)imagea, (Bitmap)imageb);
                 test.Save($"{config.OutputPath}\\{config.ImageFileName}{i}.bmp");
