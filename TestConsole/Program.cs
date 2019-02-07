@@ -11,23 +11,18 @@ namespace TestConsole
             {
                 new Images
                 {
-                    ImageA = @"C:/difftest/11.bmp",
-                    ImageB = @"C:/difftest/12.bmp"
+                    ImageA = @"C:/testbilder/11.bmp",
+                    ImageB = @"C:/testbilder/12.bmp"
                 },
                 new Images
                 {
-                    ImageA = @"C:/difftest/21.bmp",
-                    ImageB = @"C:/difftest/22.bmp"
-                },
-                new Images
-                {
-                    ImageA = @"C:/difftest/31.bmp",
-                    ImageB = @"C:/difftest/32.bmp"
+                    ImageA = @"http://cmk.bplaced.net/pictures/31.png",
+                    ImageB = @"http://cmk.bplaced.net/pictures/32.png"
                 }
             };
             var t = new CMK.ImageCompare();
             t.Compare(list);
-            var test = t.CompareToList(list);
+            //var test = t.CompareToList(list);
         }
     }
 }
