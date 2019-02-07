@@ -30,8 +30,8 @@ namespace CMK
                 list.Add(Compare(image.ImageA, image.ImageB, i));
                 i++;
             }
-            HtmlCreator.Create("index.html",list);
-            System.Diagnostics.Process.Start("index.html");
+            HtmlCreator.Create($"{config.OutputPath}//{config.OutputFileName}",list);
+            System.Diagnostics.Process.Start($"{config.OutputPath}//{config.OutputFileName}");
         }
         public List<string> CompareToList(List<Images> images)
         {
@@ -67,8 +67,11 @@ namespace CMK
             using (var imagea = loadImage(image1))
             using (var imageb = loadImage(image2))
             {
-                image1 = convertImage(imagea, i, "A") ?? image1;
-                image2 = convertImage(imagea, i, "B") ?? image1;
+                if(config.ConvertTiffToBmp)
+                {
+                    image1 = convertImage(imagea, i, "A") ?? image1;
+                    image2 = convertImage(imagea, i, "B") ?? image1;
+                }
                 var test = CompareEngine.GetDiff2((Bitmap)imagea, (Bitmap)imageb);
                 test.Save($"{config.OutputPath}\\{config.ImageFileName}{i}.bmp");
                 return new Images

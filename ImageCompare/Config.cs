@@ -16,6 +16,8 @@ namespace ImageCompare
         public string ImageFileName { get; set; } = "img";
         public string OutputFileName { get; set; } = "index.html";
 
+        public bool ConvertTiffToBmp { get; set; } = true;
+
         // Placeholders
         public string Placeholder_IndexTemplate_Script { get; set; } = "{{script}}";
         public string Placeholder_IndexTemplate_List { get; set; } = "{{list}}";
