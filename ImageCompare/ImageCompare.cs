@@ -48,8 +48,8 @@ namespace CMK
 
         public Images Compare(string image1, string image2, int i)
         {
-            using (var imagea = Image.FromFile(image1))
-            using (var imageb = Image.FromFile(image2))
+            using (var imagea = image1.StartsWith("http") ? ImageLoader.FromUrl(image1) : Image.FromFile(image1))
+            using (var imageb = image2.StartsWith("http") ? ImageLoader.FromUrl(image2) : Image.FromFile(image2))
             {
                 var test = CompareEngine.GetDiff2((Bitmap)imagea, (Bitmap)imageb);
                 test.Save($"{config.OutputPath}\\{config.ImageFileName}{i}.bmp");

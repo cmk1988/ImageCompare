@@ -47,6 +47,7 @@
     <Compile Include="DTOs\Images.cs" />
     <Compile Include="DTOs\Position.cs" />
     <Compile Include="HtmlCreator.cs" />
+    <Compile Include="Image.cs" />
     <Compile Include="ImageCompare.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
