@@ -2,6 +2,7 @@
 using ImageCompare.DTOs;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 
 namespace CMK
@@ -46,11 +47,28 @@ namespace CMK
             return list;
         }
 
+        private string convertImage(Image image, int i, string name)
+        {
+            if (image.RawFormat == ImageFormat.Tiff)
+            {
+                image.Save($"converted{name}{i}.bmp", ImageFormat.Bmp);
+                return $"converted{name}{i}.bmp";
+            }
+            return null;
+        }
+
+        private Image loadImage(string str)
+        {
+            return str.StartsWith("http") ? ImageLoader.FromUrl(str) : Image.FromFile(str);
+        }
+
         public Images Compare(string image1, string image2, int i)
         {
-            using (var imagea = image1.StartsWith("http") ? ImageLoader.FromUrl(image1) : Image.FromFile(image1))
-            using (var imageb = image2.StartsWith("http") ? ImageLoader.FromUrl(image2) : Image.FromFile(image2))
+            using (var imagea = loadImage(image1))
+            using (var imageb = loadImage(image2))
             {
+                image1 = convertImage(imagea, i, "A") ?? image1;
+                image2 = convertImage(imagea, i, "B") ?? image1;
                 var test = CompareEngine.GetDiff2((Bitmap)imagea, (Bitmap)imageb);
                 test.Save($"{config.OutputPath}\\{config.ImageFileName}{i}.bmp");
                 return new Images

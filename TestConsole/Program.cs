@@ -12,8 +12,8 @@ namespace TestConsole
             {
                 new Images
                 {
-                    ImageA = @"C:/difftest/31.bmp",
-                    ImageB = @"C:/difftest/32.bmp"
+                    ImageA = @"C:/difftest/11.bmp",
+                    ImageB = @"C:/difftest/12.bmp"
                 },
                 new Images
                 {
